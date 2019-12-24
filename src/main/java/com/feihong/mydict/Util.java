@@ -1,5 +1,7 @@
 package com.feihong.mydict;
 
+import com.sun.deploy.util.StringUtils;
+
 import java.util.*;
 
 public class Util {
@@ -106,5 +108,39 @@ public class Util {
         }
 
         return false;
+    }
+
+    public static List<String> generateDict(List<List<String>> list){
+        List<String> result = new ArrayList<>();
+
+        for(List<String> li : list){
+            //Rule0: Suifeifei ---> Suifeifei
+            result.add(StringUtils.join(li,""));
+
+            //Rule1: Suifeifei ---> Suiff
+            StringBuffer sb = new StringBuffer();
+            sb.append(li.get(0));
+            for(int i=1; i<li.size(); i++){
+                sb.append(li.get(i).substring(0,1));
+            }
+            result.add(sb.toString());
+
+            //Rule2: Suifeifei ---> sff
+            sb = new StringBuffer();
+            for(int i=0; i<li.size(); i++){
+                sb.append(li.get(i).substring(0,1));
+            }
+            result.add(sb.toString());
+
+            //Rule3: Suifeifei ---> Sfeifei
+            sb = new StringBuffer();
+            sb.append(li.get(0).substring(0,1));
+            for(int i=1; i<li.size(); i++){
+                sb.append(li.get(i));
+            }
+            result.add(sb.toString());
+        }
+
+        return result;
     }
 }

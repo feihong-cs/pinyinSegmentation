@@ -71,4 +71,40 @@ public class TestIfWork {
 
         br.close();
     }
+
+
+    @Test
+    public void test3() throws IOException {
+
+        String fileName = "C:\\Users\\41157\\Desktop\\字典\\target2.txt";
+        BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName + ".out.txt")));
+
+        String line = "";
+        while((line = br.readLine()) != null){
+
+            System.out.println("Processing " + line);
+
+            line = Util.preProcess(line);
+            Analysis mytest = new Analysis(line.toLowerCase().trim());
+            List<List<String>> result = mytest.process();
+            result = Util.matchRule(result);
+
+
+            List<String> list = Util.generateDict(result);
+            if(list.size() == 0){
+                //pass
+            }else{
+                System.out.println(list);
+                for(String str : list){
+                    bw.write(str);
+                    bw.newLine();
+                }
+            }
+        }
+
+
+        br.close();
+        bw.close();
+    }
 }
