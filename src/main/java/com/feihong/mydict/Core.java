@@ -1,11 +1,10 @@
 package com.feihong.mydict;
 
-import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Core {
+class Core {
 
     //是否为声母
     public static String shenMu(StringBuffer sb){
@@ -348,10 +347,5 @@ public class Core {
         set.addAll(Arrays.asList(args));
 
         return set.contains(shenmu);
-    }
-
-    @Test
-    public void test() throws Exception{
-        System.out.println(quanPin("AnHongJun", false));
     }
 }
